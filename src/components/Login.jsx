@@ -18,16 +18,21 @@ class Login extends Component {
             notAdmin: false,
             notLogin: props.location.state !== undefined ? true : false
         }
-        console.log(props)
     }
 
     submitHandler = async (event) => {
         event.preventDefault();
 
+        const https = require('https');
+        const agent = new https.Agent({
+            rejectUnauthorized: false
+        });
+
         this.setState({loading: true}, () => {
             axios.post('https://103.14.21.56:7443/api/v1/token/', {
                 username: this.state.username,
-                password: this.state.password
+                password: this.state.password,
+                httpAgent: agent,
             })
             .then(res => {
                 console.log(res.data);
@@ -63,8 +68,8 @@ class Login extends Component {
         return (
             <MDBContainer className="pb-4">
                 {/* <AlertCustom show={true} text="Sucecss updated data" /> */}
-                <MDBRow className="mb-4">
-                    <MDBCol size="6" className="mb-4 offset-3">
+                <MDBRow className="mb-4" center>
+                    <MDBCol md="6" sm="12" className="mb-4 md-offset-3">
                         <MDBCard style={{marginTop: '100px'}}>
                             <MDBCardBody>
                                 <center>

@@ -127,7 +127,6 @@ export class AddJobVacancyForm extends Component {
    
 
     render() {
-        console.log(this.state.errors)
         let choose_file = this.state.image_job === '' ? "Choose Image" : this.state.image_job.name;
 
         const user = this.state.usernameDropdown.map(user => {

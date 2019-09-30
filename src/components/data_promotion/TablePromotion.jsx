@@ -31,17 +31,16 @@ export class TablePromotion extends Component {
                 httpsAgent: agent,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
             })
-                .then(response => {
-                    console.log(response)
-                    this.setState({
-                        loading: false,
-                        data: response.data.results,
-                        totalData: response.data.count
-                    })
+            .then(response => {
+                this.setState({
+                    loading: false,
+                    data: response.data.results,
+                    totalData: response.data.count
                 })
-                .catch(error => {
-                    console.log(error);
-                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
         })
 
     }

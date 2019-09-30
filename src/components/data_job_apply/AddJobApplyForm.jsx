@@ -11,7 +11,7 @@ export class AddJobApplyForm extends Component {
         super(props)
         this.state = {
             username: '',
-            body_messages: '',
+            url_attachment: '',
             id_job: '',
             jobDropdown: [],
             usernameDropdown: [],
@@ -29,16 +29,20 @@ export class AddJobApplyForm extends Component {
         });
 
         await this.setState({loading: true}, () => {
+            let form = new FormData();
+            form.append('username', this.state.username)
+            form.append('id_job', this.state.id_job)
+            form.append('url_attachment', this.state.url_attachment)
+
             axios({
                 method: 'POST',
                 url: 'https://103.14.21.56:7443/api/v1/jobs/job-apply/',
                 httpsAgent: agent,
-                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') },
-                data: {
-                    username: this.state.username,
-                    id_job: this.state.id_job,
-                    body_messages: this.state.body_messages
-                }
+                headers: { 
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: form
             })
             .then(response => {
                 this.setState({
@@ -57,6 +61,12 @@ export class AddJobApplyForm extends Component {
 
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
+    }
+
+    handleImage = (e) => {
+        this.setState({ 
+            url_attachment: e.target.files[0] 
+        })
     }
 
     getAllUser = async () => {
@@ -109,6 +119,8 @@ export class AddJobApplyForm extends Component {
             return <JobDropdown key={job.id_job} job={job} />
         })
 
+        let choose_file = this.state.url_attachment === '' ? "Choose Image" : this.state.url_attachment.name;
+
         if (this.state.redirect === true) {
             return <Redirect to={{
                 pathname: "/business/job-apply",
@@ -142,10 +154,29 @@ export class AddJobApplyForm extends Component {
                                         <small className="form-text text-muted">Select job user</small>
                                         {this.state.errors.id_job ? <span className="error-message">{this.state.errors.id_job[0]}</span> : ''}
                                     </div>
-                                    <div className="form-group">
-                                        <MDBInput type="textarea" name="body_messages" label="Body Message" onChange={this.handleChange} autoComplete="off" className={this.state.errors.body_messages ? 'is-invalid' : ''}>
-                                            {this.state.errors.body_messages ? <span className="error-message">{this.state.errors.body_messages[0]}</span> : ''}
-                                        </MDBInput>
+                                    <div className="from-group form-md" style={{marginTop: '2em'}}>
+                                        <div className="input-group">
+                                            <div className="custom-file">
+                                                <input
+                                                    type="file"
+                                                    name="url_attachment"
+                                                    className="custom-file-input"
+                                                    id="inputGroupFile01"
+                                                    ref="upload"
+                                                    accept="application/pdf"
+                                                    onChange={this.handleImage} 
+                                                    className={this.state.errors.url_attachment ? 'is-invalid' : ''}
+                                                    aria-describedby="inputGroupFileAddon01"
+                                                />
+                                                <label className="custom-file-label" htmlFor="inputGroupFile01">
+                                                    {choose_file}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <small id="expiredDateHelpText" className="form-text text-muted">
+                                            Choose image for job vacancy
+                                        </small>
+                                        { this.state.errors.url_attachment ? <div className="error-message">{ this.state.errors.url_attachment[0] }</div> : ''}
                                     </div>
                                     <div className="from-group">
                                         {this.state.loading ? <MDBBtn type="button" color="purple" style={{padding: '0.4rem 2.12rem' }}><Spinner/></MDBBtn> : <MDBBtn type="submit" color="purple">Submit</MDBBtn>}

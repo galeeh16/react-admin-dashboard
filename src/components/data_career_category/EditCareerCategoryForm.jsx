@@ -44,7 +44,6 @@ export class EditCareerCategoryForm extends Component {
             data: form
         })
         .then(response => {
-            console.log(response);
             this.setState({redirect: true});
         })
         .catch(error => {

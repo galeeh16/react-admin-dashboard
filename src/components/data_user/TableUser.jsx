@@ -53,7 +53,6 @@ export class TableUser extends Component {
 
   async getData(pageNumber) {
     let offset = (pageNumber - 1) * 10;
-    console.log('offset =' + offset)
 
     const https = require('https');
     const agent = new https.Agent({
@@ -66,7 +65,6 @@ export class TableUser extends Component {
         headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
       })
         .then(response => {
-          console.log(response)
           this.setState({
             loading: false,
             data: response.data.results,
@@ -74,6 +72,9 @@ export class TableUser extends Component {
           })
         })
         .catch(error => {
+          this.setState({
+            loading: false
+          })
           console.log(error);
         });
     });
@@ -88,7 +89,7 @@ export class TableUser extends Component {
 
       let form = new FormData();
       form.append('id_profile', id_profile)
-      // form.append('url_photo', '')
+      form.append('url_photo', '')
       form.append('nik', nik)
       form.append('name', name)
       form.append('gender', gender)

@@ -138,7 +138,6 @@ export class EditJobApplyForm extends Component {
                 data: form
             })
             .then(res => {
-                console.log(res)
                 this.setState({
                     loading: false,
                     redirect: true

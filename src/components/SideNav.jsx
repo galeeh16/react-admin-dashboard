@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
 import { MDBListGroup, MDBListGroupItem, MDBIcon } from 'mdbreact';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
+import { CekLogin } from "../services/CekLogin.js";
 
 class SideNav extends Component {
     state = {
-        business: this.props.businessProps
+        business: this.props.businessProps,
+        mobileToggle: false
     }
 
     businessManagement = () => {
         this.setState({ business: !this.state.business });
     }
+
+    logout = () => {
+        localStorage.clear();
+        // return <CekLogin />
+        window.location.href = "http://103.14.21.56:49000/";
+    }
     
     render() {
+
+        if (!CekLogin()) {
+            return (<Redirect to="/" />)
+        }
+
         return (
             <div className={this.props.myPropsToggle ? "sidebar-fixed-inactive" : "sidebar-fixed"}>
                 <a href="#!" className="logo-wrapper waves-effect">
                     <h2>TRISAKTI DASHBOARD</h2>
                 </a>
-                <div className="scrollable">
+                {/* <div className="scrollable"> */}
                 <MDBListGroup className="list-group-flush">
                     <NavLink to="/home" activeClassName="activeClass">
                         <MDBListGroupItem>
@@ -58,7 +71,15 @@ class SideNav extends Component {
                     </MDBListGroup>
                     {/* END DROPDOWN */}
                 </MDBListGroup>
-                </div>
+                {/* </div> */}
+
+                <MDBListGroup className="mobile-logout" style={{position: 'fixed', bottom: 0, width: '270px'}}>
+                    {/* <NavLink to="/logout"> */}
+                        <MDBListGroupItem onClick={this.logout}>
+                            <MDBIcon icon="sign-out-alt" className="mr-1"/> Logout
+                        </MDBListGroupItem>
+                    {/* </NavLink>  */}
+                </MDBListGroup>
             </div>
         );
     }

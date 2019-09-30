@@ -42,7 +42,6 @@ export class TableJobApply extends Component {
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') }
             })
                 .then(response => {
-                    console.log(response.data);
                     this.setState({
                         loading: false,
                         data: response.data.results,

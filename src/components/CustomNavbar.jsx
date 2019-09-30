@@ -21,7 +21,7 @@ class CustomNavbar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isOpen: false,
+      isOpen: props.mobile !== undefined ? props.mobile : false,
       toggle: props.show
     };
   }
@@ -30,7 +30,17 @@ class CustomNavbar extends Component {
     this.props.myPropsToggle(val)
   }
 
+  hiddenSidebar =() => {
+    this.setState({
+      ...this.state,
+      toggle: !this.state.toggle
+    }, () => {
+      this.handlePropsToggleSidebar(this.state.toggle)
+    })
+  }
+
   toggleSidebar = () => {
+    console.log('clicked toggle sidebar')
     this.setState({
       toggle: !this.state.toggle
     }, () => {
@@ -45,7 +55,7 @@ class CustomNavbar extends Component {
   logout = () => {
     localStorage.clear();
     // return <CekLogin />
-    window.location.href = "http://localhost:3000";
+    window.location.href = "http://103.14.21.56:49000/";
   }
 
   render() {
@@ -54,11 +64,14 @@ class CustomNavbar extends Component {
     }
 
     return (
-      <MDBNavbar color="primary-color" dark expand="md" style={this.state.toggle ? { marginLeft: '0', position: 'relative', zIndex: '9' } : { marginLeft: '270px', position: 'relative', zIndex: '9' }}>
+      <MDBNavbar color="primary-color" dark expand="md" style={this.state.toggle ? { marginLeft: '0', position: 'relative'} : { marginLeft: '270px', position: 'relative'}}>
         <MDBNavbarBrand>
           <i className="navbar-toggler-icon waves-effect waves-light" onClick={this.toggleSidebar} style={{ cursor: 'pointer' }}></i>
         </MDBNavbarBrand>
-        <MDBNavbarToggler onClick={this.toggleCollapse} />
+        <span className={this.state.toggle ? "mobile-burger-hidden": "mobile-burger-show"} onClick={this.hiddenSidebar} style={{zIndex: '9999', position: 'fixed'}}>
+          <i className="fa">&#x2715;</i>
+        </span>
+        <MDBNavbarToggler onClick={this.toggleSidebar} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav right>
             <MDBNavItem style={{marginRight: '1em'}}>
@@ -68,12 +81,6 @@ class CustomNavbar extends Component {
                   <MDBIcon icon="user" /> Administrator 
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default">
-                  {/* <MDBDropdownItem href="#!">
-                    <MDBIcon icon="user" /> Profile
-                  </MDBDropdownItem>
-                  <MDBDropdownItem href="#!">
-                    <MDBIcon icon="cog" /> Settings
-                  </MDBDropdownItem> */}
                   <MDBDropdownItem href="!#" onClick={this.logout}>
                     <MDBIcon icon="sign-out-alt" /> Logout
                   </MDBDropdownItem>
