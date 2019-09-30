@@ -175,8 +175,8 @@ export class EditJobApplyForm extends Component {
 
         return (
             <div className={this.props.myPropsToggle ? "main-sidebar-inactive": "main"}>
-                <MDBCard style={{ minHeight: 'calc(100vh - 91px)' }}>
-                    <MDBCardBody className="col-6">
+                <MDBCard>
+                    <MDBCardBody className="col-md-6 col-sm-12" style={{ minHeight: 'calc(100vh - 91px)' }}>
                         <MDBCardTitle className="teal-text">Edit Job Apply</MDBCardTitle>
                         <form method="POST" onSubmit={this.handleSubmit} encType="multipart/form-data">
                             <div className="form-group form-md">

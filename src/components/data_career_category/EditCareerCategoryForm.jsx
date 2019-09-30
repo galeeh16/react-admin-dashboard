@@ -79,10 +79,10 @@ export class EditCareerCategoryForm extends Component {
     render() {
         return (
             <div className={this.props.myPropsToggle ? "main-sidebar-inactive" : "main"}>
-                <MDBRow style={{ minHeight: 'calc(100vh - 95px)' }}>
+                <MDBRow >
                     <MDBCol>
-                        <MDBCard style={{ minHeight: '100%' }}>
-                            <MDBCardBody className="col-6">
+                        <MDBCard>
+                            <MDBCardBody className="col-md-6 col-sm-12" style={{ minHeight: 'calc(100vh - 95px)' }}>
                                 <MDBCardTitle className="teal-text">Edit Career Category</MDBCardTitle>
                                 <form method="POST" onSubmit={ this.handleSubmit }>
 

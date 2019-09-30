@@ -136,12 +136,12 @@ export class EditUserForm extends Component {
         return (
             <div className={this.props.myPropsToggle ? "main-sidebar-inactive" : "main"}>
                 <MDBCol style={{ padding: '0' }}>
-                    <MDBCard style={{ width: '100%' }}>
+                    <MDBCard>
                         <MDBCardBody>
                             <MDBCardTitle className="teal-text">Edit User</MDBCardTitle>
                             <form method="POST" onSubmit={this.submitHandler} noValidate>
                                 <MDBRow>
-                                    <MDBCol size="6">
+                                    <MDBCol md="6" sm="12" xl="6">
                                         <div className="form-group">
                                             <MDBInput label="Username" size="md" value={this.state.username} onChange={this.changeHandler} name="username">
                                                 <span className="error-username error-message"></span>

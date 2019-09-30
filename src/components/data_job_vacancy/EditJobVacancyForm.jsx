@@ -178,14 +178,14 @@ export class EditJobVacancyForm extends Component {
 
         return (
             <div className={this.props.myPropsToggle ? "main-sidebar-inactive" : "main"}>
-                <MDBRow style={{ minHeight: 'calc(100vh - 95px)' }}>
+                <MDBRow>
                     <MDBCol size="12">
-                        <MDBCard style={{ minHeight: '100%' }}>
-                            <MDBCardBody>
+                        <MDBCard>
+                            <MDBCardBody style={{ minHeight: 'calc(100vh - 95px)' }}>
                                 <MDBCardTitle className="teal-text">Edit Job Vacancy</MDBCardTitle>
                                 <form method="POST" onSubmit={this.handleSubmit} encType="multipart/form-data">
                                     <MDBRow>
-                                        <MDBCol size="6">
+                                        <MDBCol md="6" sm="12" xl="6">
                                             <div className="form-group">
                                                 <MDBInput type="text" name="title_joblist" label="Job Title" onChange={this.handleChange} autoComplete="off" value={this.state.title_joblist} className={this.state.errors.title_joblist ? 'is-invalid' : ''}>
                                                     {this.state.errors.title_joblist ? <span className="error-message">{this.state.errors.title_joblist[0]}</span> : ''}
@@ -220,7 +220,7 @@ export class EditJobVacancyForm extends Component {
                                             </div>
                                         </MDBCol>
 
-                                        <MDBCol size="6">
+                                        <MDBCol md="6" sm="12" xl="6">
                                             <div className="form-group">
                                                 <div className="form-md">
                                                     <label htmlFor="username" className={this.state.errors.username ? 'error-message': ''}>User</label>

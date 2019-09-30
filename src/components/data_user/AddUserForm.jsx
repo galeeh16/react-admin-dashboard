@@ -59,10 +59,10 @@ export class AddUserForm extends Component {
         }
 
         return (
-            <div className={this.props.myPropsToggle ? "main-sidebar-inactive" : "main"} style={{ height: 'calc(100vh - 60px)' }}>
-                <MDBCol style={{ padding: '0', height: '100%' }} >
-                    <MDBCard style={{ width: '100%', height: '100%' }}>
-                        <MDBCardBody>
+            <div className={this.props.myPropsToggle ? "main-sidebar-inactive" : "main"}>
+                <MDBCol style={{ padding: '0'}} >
+                    <MDBCard>
+                        <MDBCardBody style={{ minHeight: 'calc(100vh - 60px)' }}>
                             <MDBCardTitle className="teal-text">Add User</MDBCardTitle>
                             <form method="POST" action="" onSubmit={this.submitHandler}>
                                 <MDBInput label="Username" size="md" value={this.state.username} onChange={this.changeHandler} name="username" autoComplete="off" className={this.state.errors.username ? 'is-invalid' : ''}>

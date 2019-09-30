@@ -67,10 +67,10 @@ export class AddPromotionForm extends Component {
         let choose_file = this.state.url_banner === '' ? "Choose File" : this.state.url_banner.name
 
         return (
-            <div className={this.props.myPropsToggle ? "main-sidebar-inactive": "main"} style={{height: 'calc(100vh - 60px)' }}>
-                <div className="card" style={{ height: '100%' }}>
-                    <div className="card-body" style={{ height: '100%' }}>
-                        <MDBCol size="6">
+            <div className={this.props.myPropsToggle ? "main-sidebar-inactive": "main"}>
+                <div className="card">
+                    <div className="card-body" style={{minHeight: 'calc(100vh - 60px)' }}>
+                        <MDBCol sm="12" md="6" xl="6">
                             <p className="card-title teal-text">Add Promotion</p>
 
                             <form action="" method="POST" onSubmit={this.submitHandler} encType="multipart/form-data">

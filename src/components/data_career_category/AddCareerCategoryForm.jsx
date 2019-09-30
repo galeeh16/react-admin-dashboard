@@ -74,8 +74,8 @@ export class AddCareerCategoryForm extends Component {
             <div className={this.props.myPropsToggle ? "main-sidebar-inactive" : "main"}>
                 <MDBRow>
                     <MDBCol>
-                        <MDBCard style={{height: 'calc(100vh - 95px)'}}>
-                            <MDBCardBody className="col-6">
+                        <MDBCard>
+                            <MDBCardBody className="col-md-6 col-sm-12"  style={{height: 'calc(100vh - 95px)'}}>
                                 <MDBCardTitle className="teal-text">Add Career Category</MDBCardTitle>
                                 <form method="POST" onSubmit={this.handleSubmit}>
 
